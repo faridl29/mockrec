@@ -8,14 +8,14 @@ void main() {
 
   setUp(() {
     MockStorage.clear();
-    MockRecorder.setMockMode(false);
+    Mockrec.setMockMode(false);
     dio = Dio();
     // Using http://example.com to avoid real network calls if possible,
     // but interceptor mock mode should catch it before network.
     // For normal mode tests we will use an interceptor to mock the real network
     // so we don't actually hit the internet.
     dio.options.baseUrl = 'http://example.com';
-    MockRecorder.enable(dio);
+    Mockrec.enable(dio);
 
     // Add a fake backend interceptor to simulate real network responses
     // when mock mode is OFF.
@@ -36,17 +36,17 @@ void main() {
     );
   });
 
-  group('MockRecorder', () {
+  group('Mockrec', () {
     test('isMockMode defaults to false', () {
-      expect(MockRecorder.isMockMode, isFalse);
+      expect(Mockrec.isMockMode, isFalse);
     });
 
     test('setMockMode toggles mode', () {
-      MockRecorder.setMockMode(true);
-      expect(MockRecorder.isMockMode, isTrue);
+      Mockrec.setMockMode(true);
+      expect(Mockrec.isMockMode, isTrue);
 
-      MockRecorder.setMockMode(false);
-      expect(MockRecorder.isMockMode, isFalse);
+      Mockrec.setMockMode(false);
+      expect(Mockrec.isMockMode, isFalse);
     });
 
     test('records response in normal mode', () async {
@@ -66,7 +66,7 @@ void main() {
       expect(MockStorage.length, 1);
 
       // 2. Enable mock mode
-      MockRecorder.setMockMode(true);
+      Mockrec.setMockMode(true);
 
       // 3. Replay (we temporarily remove our fake backend interceptor to prove
       // it's the mockrec that's returning the data).
@@ -79,7 +79,7 @@ void main() {
     });
 
     test('throws error in mock mode if no data exists', () async {
-      MockRecorder.setMockMode(true);
+      Mockrec.setMockMode(true);
 
       expect(
         () => dio.get('/unrecorded'),
@@ -99,7 +99,7 @@ void main() {
 
       expect(MockStorage.length, 2);
 
-      MockRecorder.clear();
+      Mockrec.clear();
 
       expect(MockStorage.length, 0);
     });

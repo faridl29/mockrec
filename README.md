@@ -54,8 +54,8 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  mockrec: ^0.0.1
-  dio: ^5.0.0
+  mockrec: ^0.0.2
+  dio: ^5.4.0
 ```
 
 ```bash
@@ -72,13 +72,13 @@ void main() async {
   final dio = Dio();
 
   // 1. Attach the interceptor
-  MockRecorder.enable(dio);
+  Mockrec.enable(dio);
 
   // 2. Fetch data normally (it silently records the response!)
   await dio.get("https://jsonplaceholder.typicode.com/users/1");
 
   // 3. Enable Mock Mode
-  MockRecorder.setMockMode(true);
+  Mockrec.setMockMode(true);
 
   // 4. Fetch again — Instant response, zero network calls!
   final response = await dio.get("https://jsonplaceholder.typicode.com/users/1");
@@ -90,7 +90,7 @@ void main() async {
 
 ## 🛠️ API Reference
 
-### `MockRecorder.enable()`
+### `Mockrec.enable()`
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
@@ -98,7 +98,7 @@ void main() async {
 
 Attaches the recording interceptor to your Dio instance. This must be called **before** any API requests are made.
 
-### `MockRecorder.setMockMode()`
+### `Mockrec.setMockMode()`
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
@@ -106,13 +106,13 @@ Attaches the recording interceptor to your Dio instance. This must be called **b
 
 Toggles the core engine. When set to `true`, requests will never hit the network. If no mock data exists for an endpoint, a clear `DioException` is thrown to let you know.
 
-### `MockRecorder.isMockMode`
+### `Mockrec.isMockMode`
 
 | Property | Type | Description |
 |---|---|---|
 | `isMockMode` | `bool` | Returns `true` if mock mode is currently active |
 
-### `MockRecorder.clear()`
+### `Mockrec.clear()`
 
 Instantly clears all recorded mock data from memory. Extremely useful for resetting states between test runs or when switching user accounts.
 
@@ -139,7 +139,7 @@ lib/
 | Dart SDK | `>=3.0.0 <4.0.0` |
 | Flutter | `>=3.10.0` |
 | Null safety | ✅ |
-| Dependencies | `dio: ^5.0.0` |
+| Dependencies | `dio: ^5.4.0` |
 
 ---
 

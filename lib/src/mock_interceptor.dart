@@ -35,7 +35,7 @@ import 'utils.dart';
 /// dio.interceptors.add(MockInterceptor());
 /// ```
 ///
-/// Typically you should use [MockRecorder.enable] instead of adding
+/// Typically you should use [Mockrec.enable] instead of adding
 /// this interceptor manually.
 class MockInterceptor extends Interceptor {
   /// Whether mock mode is currently active.
@@ -80,7 +80,7 @@ class MockInterceptor extends Interceptor {
         DioException(
           requestOptions: options,
           type: DioExceptionType.unknown,
-          error: 'MockRecorder: No mock data found for [$key]. '
+          error: 'Mockrec: No mock data found for [$key]. '
               'Record the API response first by making a real request '
               'with mock mode disabled.',
         ),
@@ -97,7 +97,8 @@ class MockInterceptor extends Interceptor {
   /// In mock mode, this callback is not reached because requests
   /// are resolved in [onRequest].
   @override
-  void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
+  void onResponse(
+      Response<dynamic> response, ResponseInterceptorHandler handler) {
     if (!isMockMode) {
       // Record the response for future replay.
       final key = generateKey(response.requestOptions);

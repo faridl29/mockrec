@@ -1,6 +1,6 @@
 /// Core implementation of the mockrec package.
 ///
-/// Provides the main [MockRecorder] class with static methods
+/// Provides the main [Mockrec] class with static methods
 /// to enable recording, toggle mock mode, and manage stored data.
 library;
 
@@ -11,7 +11,7 @@ import 'mock_storage.dart';
 
 /// Lightweight API recorder for Dio.
 ///
-/// `MockRecorder` lets you record real API responses and replay them
+/// `Mockrec` lets you record real API responses and replay them
 /// without hitting the backend. Attach it to any Dio instance with
 /// [enable], then toggle between recording and replay using
 /// [setMockMode].
@@ -22,13 +22,13 @@ import 'mock_storage.dart';
 /// final dio = Dio();
 ///
 /// // Attach the interceptor
-/// MockRecorder.enable(dio);
+/// Mockrec.enable(dio);
 ///
 /// // Normal mode — records API responses
 /// await dio.get('/user');
 ///
 /// // Enable mock mode — replays from memory
-/// MockRecorder.setMockMode(true);
+/// Mockrec.setMockMode(true);
 /// await dio.get('/user'); // returns recorded response
 /// ```
 ///
@@ -40,8 +40,8 @@ import 'mock_storage.dart';
 /// | [setMockMode] | Toggle between recording and replay mode |
 /// | [isMockMode] | Check current mode |
 /// | [clear] | Clear all recorded data |
-class MockRecorder {
-  MockRecorder._();
+class Mockrec {
+  Mockrec._();
 
   /// Internal interceptor instance.
   ///
@@ -61,7 +61,7 @@ class MockRecorder {
   ///
   /// ```dart
   /// final dio = Dio();
-  /// MockRecorder.enable(dio);
+  /// Mockrec.enable(dio);
   /// ```
   static void enable(Dio dio) {
     _interceptor ??= MockInterceptor();
@@ -84,10 +84,10 @@ class MockRecorder {
   ///
   /// ```dart
   /// // Switch to replay mode
-  /// MockRecorder.setMockMode(true);
+  /// Mockrec.setMockMode(true);
   ///
   /// // Switch back to recording mode
-  /// MockRecorder.setMockMode(false);
+  /// Mockrec.setMockMode(false);
   /// ```
   static void setMockMode(bool value) {
     _interceptor?.isMockMode = value;
@@ -98,7 +98,7 @@ class MockRecorder {
   /// ## Example
   ///
   /// ```dart
-  /// if (MockRecorder.isMockMode) {
+  /// if (Mockrec.isMockMode) {
   ///   print('Running in mock mode');
   /// }
   /// ```
@@ -112,7 +112,7 @@ class MockRecorder {
   /// ## Example
   ///
   /// ```dart
-  /// MockRecorder.clear();
+  /// Mockrec.clear();
   /// ```
   static void clear() {
     MockStorage.clear();

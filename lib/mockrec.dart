@@ -10,13 +10,13 @@
 /// final dio = Dio();
 ///
 /// // Attach the interceptor
-/// MockRecorder.enable(dio);
+/// Mockrec.enable(dio);
 ///
 /// // Normal mode — records API responses
 /// await dio.get('/user');
 ///
 /// // Enable mock mode — replays from memory
-/// MockRecorder.setMockMode(true);
+/// Mockrec.setMockMode(true);
 /// await dio.get('/user'); // returns recorded response
 /// ```
 library;

@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mockrec/mockrec.dart';
 
-void main() => runApp(const MockRecorderExample());
+void main() => runApp(const MockrecExample());
 
 /// Example app demonstrating mockrec usage.
-class MockRecorderExample extends StatelessWidget {
+class MockrecExample extends StatelessWidget {
   /// Creates the example app.
-  const MockRecorderExample({super.key});
+  const MockrecExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _DemoPageState extends State<DemoPage> {
   @override
   void initState() {
     super.initState();
-    MockRecorder.enable(_dio);
+    Mockrec.enable(_dio);
   }
 
   Future<void> _fetchUser() async {
@@ -79,7 +79,7 @@ class _DemoPageState extends State<DemoPage> {
   void _toggleMockMode() {
     setState(() {
       _mockMode = !_mockMode;
-      MockRecorder.setMockMode(_mockMode);
+      Mockrec.setMockMode(_mockMode);
       _result = _mockMode
           ? 'Mock mode ON — replaying from memory'
           : 'Mock mode OFF — recording from API';
@@ -87,7 +87,7 @@ class _DemoPageState extends State<DemoPage> {
   }
 
   void _clearAll() {
-    MockRecorder.clear();
+    Mockrec.clear();
     setState(() => _result = 'All recorded data cleared!');
   }
 

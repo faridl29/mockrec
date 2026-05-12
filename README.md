@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="https://raw.githubusercontent.com/faridl29/mockrec/main/assets/logo.png" height="150" alt="mockrec logo" />
+</p>
+
+<p align="center">
   <h1 align="center">mockrec</h1>
   <p align="center">
     <strong>Record API once, run your Flutter app without backend.</strong>
